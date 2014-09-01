@@ -6,7 +6,9 @@ module.exports = function(express, instances) {
 			instances.register(
 				req.body.species,
 				req.body.hostname,
-				req.body.port
+				req.body.port,
+				req.body.version,
+				req.connection.remoteAddress
 			);
 			res.json({result: 'ok'});
 		})

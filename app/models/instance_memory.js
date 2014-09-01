@@ -4,19 +4,22 @@ var instances = {};
 
 module.exports = function(maxTimeout) {
 	return {
-		register: function(species, hostname, port) {
+		register: function(species, hostname, port, version, address) {
 			instances[species] = instances[species] || {};
-			instances[species][hostname] = {
+			instances[species][version] = instances[species][version] || {};
+			instances[species][version][hostname] = {
 				hostname: hostname,
 				port: port,
-				timestamp: moment()
+				version: version,
+				timestamp: moment(),
+				address: address
 			};
 			setTimeout(function() {
 				var difference;
-				if (instances[species] && instances[species][hostname]) {
-					difference = moment() - instances[species][hostname]['timestamp'];
+				if (instances[species] && instances[species][version] && instances[species][version][hostname]) {
+					difference = moment() - instances[species][version][hostname]['timestamp'];
 					if (difference > maxTimeout * 1000) {
-						instances[species][hostname] = undefined;
+						instances[species][version][hostname] = undefined;
 						console.log('Removing ' + hostname + ' from ' + species + ' pool due to timeout');
 					}
 				}
