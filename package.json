@@ -1,0 +1,12 @@
+{
+	"name": "lighthouse",
+	"main": "server.js",
+	"dependencies": {
+		"express": "~4.0.0",
+		"mongoose": "~3.6.13",
+		"body-parser": "~1.0.1",
+		"underscore": "~1.7.0",
+		"async": "~0.9.0",
+		"moment": "~2.8.2"
+	}
+}
